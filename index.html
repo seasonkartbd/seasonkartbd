@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeasonKart BD | Premium Online Shopping in Bangladesh</title>
+    <meta name="description" content="Bangladesh's premier online shopping destination. Premium electronics, fashion, home essentials with fast delivery and secure payment.">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="SeasonKart BD | Premium Online Shopping">
+    <meta property="og:description" content="Bangladesh's premier e-commerce platform with premium products and exceptional service.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://seasonkartbd.com">
+    <meta property="og:image" content="assets/img/og-image.jpg">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://seasonkartbd.com">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "SeasonKart BD",
+        "url": "https://seasonkartbd.com",
+        "logo": "https://seasonkartbd.com/assets/img/logo.svg",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+8801805111347",
+            "contactType": "Customer Service",
+            "availableLanguage": ["English", "Bengali"]
+        }
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/pages.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader-container">
+            <div class="logo-loader">
+                <span class="logo-text">SeasonKart</span>
+                <span class="logo-badge">BD</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Transition Overlay -->
+    <div class="page-transition" id="pageTransition"></div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Main Header -->
+    <header class="main-header" id="mainHeader">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <div class="top-info">
+                        <span class="info-item">
+                            <i class="fas fa-shipping-fast"></i>
+                            Free Delivery in Dhaka & Chattogram
+                        </span>
+                        <span class="info-item">
+                            <i class="fas fa-phone-alt"></i>
+                            Hotline: 01805111347
+                        </span>
+                    </div>
+                    <div class="top-actions">
+                        <div class="language-switch">
+                            <button class="lang-btn active" data-lang="en">EN</button>
+                            <button class="lang-btn" data-lang="bn">বাংলা</button>
+                        </div>
+                        <div class="theme-toggle">
+                            <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+                                <i class="fas fa-sun"></i>
+                                <i class="fas fa-moon"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+            <div class="container">
+                <div class="nav-grid">
+                    <!-- Logo -->
+                    <a href="index.html" class="brand-logo">
+                        <div class="logo-wrapper">
+                            <span class="logo-main">SeasonKart</span>
+                            <span class="logo-country">BD</span>
+                        </div>
+                    </a>
+
+                    <!-- Mega Menu Trigger -->
+                    <button class="menu-trigger" id="menuTrigger" aria-expanded="false">
+                        <span class="menu-icon">
+                            <span class="menu-line"></span>
+                            <span class="menu-line"></span>
+                            <span class="menu-line"></span>
+                        </span>
+                        <span class="menu-text">Browse Categories</span>
+                    </button>
+
+                    <!-- Search -->
+                    <div class="search-container">
+                        <form class="search-form" id="searchForm" role="search">
+                            <input type="text" 
+                                   class="search-input" 
+                                   id="searchInput"
+                                   placeholder="Search for products, brands & categories..."
+                                   autocomplete="off"
+                                   aria-label="Search products">
+                            <button type="submit" class="search-btn" aria-label="Search">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <div class="search-suggestions" id="searchSuggestions"></div>
+                        </form>
+                    </div>
+
+                    <!-- Action Icons -->
+                    <div class="nav-actions">
+                        <a href="pages/account.html" class="nav-action" aria-label="My Account">
+                            <i class="far fa-user"></i>
+                            <span class="action-label">Account</span>
+                        </a>
+                        <button class="nav-action" id="wishlistAction" aria-label="Wishlist">
+                            <i class="far fa-heart"></i>
+                            <span class="action-label">Wishlist</span>
+                            <span class="action-badge" id="wishlistCount">0</span>
+                        </button>
+                        <button class="nav-action" id="compareAction" aria-label="Compare">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span class="action-label">Compare</span>
+                            <span class="action-badge" id="compareCount">0</span>
+                        </button>
+                        <button class="nav-action cart-action" id="cartAction" aria-label="Shopping Cart">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span class="action-label">Cart</span>
+                            <span class="action-badge" id="cartCount">0</span>
+                        </button>
+                    </div>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mega Menu -->
+            <div class="mega-menu" id="megaMenu">
+                <div class="container">
+                    <div class="mega-grid">
+                        <div class="mega-column">
+                            <h3 class="mega-title">Electronics</h3>
+                            <ul class="mega-links">
+                                <li><a href="pages/category.html?cat=smartphones">Smartphones</a></li>
+                                <li><a href="pages/category.html?cat=laptops">Laptops & Computers</a></li>
+                                <li><a href="pages/category.html?cat=tv">Televisions</a></li>
+                                <li><a href="pages/category.html?cat=audio">Audio & Headphones</a></li>
+                                <li><a href="pages/category.html?cat=watches">Smart Watches</a></li>
+                                <li><a href="pages/category.html?cat=camera">Cameras</a></li>
+                            </ul>
+                        </div>
+                        <div class="mega-column">
+                            <h3 class="mega-title">Fashion</h3>
+                            <ul class="mega-links">
+                                <li><a href="pages/category.html?cat=men">Men's Fashion</a></li>
+                                <li><a href="pages/category.html?cat=women">Women's Fashion</a></li>
+                                <li><a href="pages/category.html?cat=kids">Kids & Baby</a></li>
+                                <li><a href="pages/category.html?cat=footwear">Footwear</a></li>
+                                <li><a href="pages/category.html?cat=jewelry">Jewelry & Watches</a></li>
+                                <li><a href="pages/category.html?cat=bags">Bags & Luggage</a></li>
+                            </ul>
+                        </div>
+                        <div class="mega-column">
+                            <h3 class="mega-title">Home & Living</h3>
+                            <ul class="mega-links">
+                                <li><a href="pages/category.html?cat=furniture">Furniture</a></li>
+                                <li><a href="pages/category.html?cat=decor">Home Decor</a></li>
+                                <li><a href="pages/category.html?cat=kitchen">Kitchen & Dining</a></li>
+                                <li><a href="pages/category.html?cat=appliances">Home Appliances</a></li>
+                                <li><a href="pages/category.html?cat=lighting">Lighting</a></li>
+                                <li><a href="pages/category.html?cat=gardening">Gardening</a></li>
+                            </ul>
+                        </div>
+                        <div class="mega-column">
+                            <h3 class="mega-title">Beauty & Health</h3>
+                            <ul class="mega-links">
+                                <li><a href="pages/category.html?cat=skincare">Skincare</a></li>
+                                <li><a href="pages/category.html?cat=makeup">Makeup</a></li>
+                                <li><a href="pages/category.html?cat=fragrance">Fragrances</a></li>
+                                <li><a href="pages/category.html?cat=hair">Hair Care</a></li>
+                                <li><a href="pages/category.html?cat=wellness">Health & Wellness</a></li>
+                                <li><a href="pages/category.html?cat=personal">Personal Care</a></li>
+                            </ul>
+                        </div>
+                        <div class="mega-banner">
+                            <div class="banner-content">
+                                <h4>Summer Collection</h4>
+                                <p>Up to 50% OFF</p>
+                                <a href="pages/category.html?cat=summer" class="btn btn-outline-light">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mini Cart Drawer -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="drawer-header">
+            <h3>Shopping Cart</h3>
+            <button class="drawer-close" id="cartClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="drawer-body" id="cartBody">
+            <!-- Cart items loaded via JS -->
+        </div>
+        <div class="drawer-footer">
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span class="subtotal" id="cartSubtotal">৳0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span>৳60</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span class="total-amount" id="cartTotal">৳60</span>
+                </div>
+            </div>
+            <div class="cart-actions">
+                <a href="pages/cart.html" class="btn btn-secondary">View Cart</a>
+                <a href="pages/checkout.html" class="btn btn-primary">Checkout</a>
+            </div>
+        </div>
+    </div>
+    <div class="drawer-overlay" id="cartOverlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text" data-aos="fade-up">
+                        <h1 class="hero-title">
+                            <span class="title-line">Premium Shopping</span>
+                            <span class="title-line">Experience in</span>
+                            <span class="title-line highlight">Bangladesh</span>
+                        </h1>
+                        <p class="hero-subtitle">
+                            Discover curated collections of electronics, fashion, home essentials and more with exceptional quality and service.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="pages/shop.html" class="btn btn-primary btn-lg" data-hover="Explore Now">
+                                <span>Shop Now</span>
+                            </a>
+                            <a href="#categories" class="btn btn-outline btn-lg">
+                                <span>Browse Categories</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-image" data-aos="fade-left">
+                        <div class="image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Premium Shopping Experience"
+                                 class="hero-img">
+                            <div class="hero-badge">
+                                <span class="badge-text">Premium</span>
+                                <span class="badge-subtext">Quality</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-wave">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="categories-section" id="categories">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2 class="section-title">Shop by Category</h2>
+                    <p class="section-subtitle">Browse our premium collections</p>
+                </div>
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Categories loaded via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="featured-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <div class="header-content">
+                        <h2 class="section-title">Featured Products</h2>
+                        <p class="section-subtitle">Curated premium selections</p>
+                    </div>
+                    <div class="header-controls">
+                        <a href="pages/shop.html" class="btn-link">
+                            View All
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="products-grid" id="featuredProducts">
+                    <!-- Products loaded via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Promo Banner -->
+        <section class="promo-section" data-aos="zoom-in">
+            <div class="container">
+                <div class="promo-banner">
+                    <div class="promo-content">
+                        <span class="promo-tag">Limited Time</span>
+                        <h3 class="promo-title">Eid Festival Sale</h3>
+                        <p class="promo-text">Up to 60% OFF on all premium collections</p>
+                        <div class="promo-countdown" id="countdown">
+                            <div class="countdown-item">
+                                <span class="countdown-value" id="days">00</span>
+                                <span class="countdown-label">Days</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-value" id="hours">00</span>
+                                <span class="countdown-label">Hours</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-value" id="minutes">00</span>
+                                <span class="countdown-label">Minutes</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-value" id="seconds">00</span>
+                                <span class="countdown-label">Seconds</span>
+                            </div>
+                        </div>
+                        <a href="pages/shop.html" class="btn btn-light btn-lg">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section class="services-section">
+            <div class="container">
+                <div class="services-grid">
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="service-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4>Free Shipping</h4>
+                            <p>Free delivery on orders over ৳999 in Dhaka & Chattogram</p>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4>Secure Payment</h4>
+                            <p>100% secure payment with SSL encryption</p>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="service-icon">
+                            <i class="fas fa-undo-alt"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4>Easy Returns</h4>
+                            <p>14-day return policy for all products</p>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="service-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4>24/7 Support</h4>
+                            <p>Dedicated customer support team</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-card" data-aos="zoom-in">
+                    <div class="newsletter-content">
+                        <h3>Stay Updated</h3>
+                        <p>Subscribe to our newsletter for exclusive offers and new arrivals</p>
+                        <form class="newsletter-form" id="newsletterForm">
+                            <div class="form-group">
+                                <input type="email" 
+                                       class="form-input" 
+                                       placeholder="Your email address"
+                                       required>
+                                <button type="submit" class="btn btn-primary">
+                                    <span>Subscribe</span>
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                            <div class="form-hint">
+                                <i class="fas fa-lock"></i>
+                                We respect your privacy. Unsubscribe at any time.
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <div class="footer-logo">
+                            <a href="index.html" class="brand-logo">
+                                <span class="logo-main">SeasonKart</span>
+                                <span class="logo-country">BD</span>
+                            </a>
+                        </div>
+                        <p class="footer-description">
+                            Bangladesh's premier online shopping destination, offering premium products with exceptional service and fast delivery.
+                        </p>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="footer-title">Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="pages/shop.html">Shop</a></li>
+                            <li><a href="pages/about.html">About Us</a></li>
+                            <li><a href="pages/contact.html">Contact Us</a></li>
+                            <li><a href="pages/faq.html">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="footer-title">Customer Service</h4>
+                        <ul class="footer-links">
+                            <li><a href="pages/returns.html">Return Policy</a></li>
+                            <li><a href="pages/shipping.html">Shipping Info</a></li>
+                            <li><a href="pages/privacy.html">Privacy Policy</a></li>
+                            <li><a href="pages/terms.html">Terms & Conditions</a></li>
+                            <li><a href="pages/order-tracking.html">Track Your Order</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="footer-title">Contact Info</h4>
+                        <ul class="footer-contact">
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>01805111347</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>seasonkartbd@gmail.com</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Dhaka, Bangladesh</span>
+                            </li>
+                        </ul>
+                        <div class="payment-methods">
+                            <span class="payment-title">We Accept:</span>
+                            <div class="payment-icons">
+                                <i class="fab fa-cc-visa"></i>
+                                <i class="fab fa-cc-mastercard"></i>
+                                <i class="fab fa-cc-amex"></i>
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="bottom-content">
+                    <div class="copyright">
+                        © 2024 SeasonKart BD. All rights reserved.
+                    </div>
+                    <div class="footer-badges">
+                        <span class="badge-item">
+                            <i class="fas fa-truck"></i>
+                            Fast Delivery
+                        </span>
+                        <span class="badge-item">
+                            <i class="fas fa-cash-register"></i>
+                            Cash on Delivery
+                        </span>
+                        <span class="badge-item">
+                            <i class="fas fa-undo-alt"></i>
+                            Easy Returns
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Quick View Modal -->
+    <div class="quickview-modal" id="quickViewModal">
+        <div class="modal-content">
+            <!-- Content loaded via JS -->
+        </div>
+        <button class="modal-close" id="quickViewClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="modal-overlay" id="quickViewOverlay"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.3/dist/lenis.min.js"></script>
+    
+    <!-- Main App -->
+    <script type="module" src="assets/js/app.js"></script>
+    <script type="module" src="assets/js/data.js"></script>
+    <script type="module" src="assets/js/components.js"></script>
+    <script type="module" src="assets/js/animations.js"></script>
+</body>
+</html>
